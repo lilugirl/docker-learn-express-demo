@@ -1,0 +1,26 @@
+version: "3"
+services:
+  express-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: development
+    volumes:
+      - ./:/app:ro
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - MONGO_USER=liuyi
+      - MONGO_PASSWORD=123456
+    command: npm run dev
+
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=liuyi
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    volumes:
+      - mongo-db:/data/db
+
+volumes:
+  mongo-db:

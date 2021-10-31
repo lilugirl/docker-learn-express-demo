@@ -1,0 +1,23 @@
+version: "3"
+services:
+  express-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+      - MONGO_USER=liuyi
+      - MONGO_PASSWORD=123456
+    command: node index.js
+
+  mongo:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=liuyi
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    volumes:
+      - mongo-db-prod:/data/db
+
+volumes:
+  mongo-db-prod:
